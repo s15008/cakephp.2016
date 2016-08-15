@@ -70,4 +70,15 @@ class HeloController extends AppController
 		echo "<script></script>";
 		echo "</body></html>";
 	}
+
+	public function add() {
+		if ($this->request->is('post')) {
+			$person = $this->Persons->newEntity();
+			$person = $this->Persons->patchEntity($person, $this->request->data);
+			if ($this->Persons->save($person)) {
+				return $this->redirect(['action' => 'index']);
+			}
+		}
+	}
 }
+
